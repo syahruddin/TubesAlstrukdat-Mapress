@@ -1,0 +1,8 @@
+ C      
+C1C  C2C
+ C      
+        
+        
+ X      
+X3X  X4X
+ X  D   
