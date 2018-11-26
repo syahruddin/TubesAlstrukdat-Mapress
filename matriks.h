@@ -1,7 +1,5 @@
 /* ********** Definisi TYPE MATRIKS dengan indeks dan elemen integer ********** */
 
-//diambil dari olympia
-
 #ifndef MATRIKS_H
 #define MATRIKS_H
 
