@@ -1,0 +1,50 @@
+1. ADT Jam
+ADT ini digunakan untuk menyimpan waktu ketika melakukan save.
+
+Done : 
+Pelaku :
+
+2. ADT Point
+ADT ini digunakan sebagai representasi posisi.
+
+Done : 
+Pelaku :
+
+
+3. ADT Array
+ADT ini digunakan sebagai representasi pesanan (order).
+
+Done : 
+Pelaku :
+
+
+4. ADT Matrix
+ADT ini digunakan sebagai representasi sebagian ruangan yang ada pada permainan.
+
+Done : 
+Pelaku :
+
+
+5. ADT Mesin Karakter + Mesin Kata
+ADT ini digunakan untuk:
+- membaca informasi yang diperlukan dari file eksternal, misal informasi peta,
+- membaca command dari pengguna, dan
+- membaca state dari permainan yang sudah pernah disimpan.
+
+Done : 
+Pelaku :
+
+
+6. ADT Queue
+ADT ini digunakan sebagai representasi antrean pelanggan.
+
+Done : 
+Pelaku :
+
+
+7. ADT Stack
+ADT ini digunakan sebagai representasi tumpukan makanan di tangan dan di nampan
+
+Done : 
+Pelaku :
+
