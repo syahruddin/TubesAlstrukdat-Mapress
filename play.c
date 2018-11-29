@@ -6,13 +6,15 @@
 void startmain(char name[]){
 // yang dijalanin
     infopermainan infogame;
+    CreateEmptyQueue(&infogame.antrian,6);
     infogame.money = 0;
+    infogame.tangan = 0;
     infogame.nyawa = 2;
     infogame.time = 0;
     infogame.isDoor = 0;
     infogame.isKitchen = 0; //boolean yg nentuin apakah player lagi di kitchen atau engga(r tamu)
     point player = MakePoint(5,3);
-    
+    AddQueue(&infogame.antrian,createCustomer());
     
     MATRIKS petaTamu, petaDapur;
     BacaFileMap(&petaTamu,"ruangtamu.txt");
@@ -197,12 +199,16 @@ void getInput(MATRIKS *peta1, MATRIKS *peta2, infopermainan *infogame, char name
         
         
         if(!strcmp(input,"TAKE")){
+            if(((*infogame).tangan <= 3)&&((*infogame).isKitchen)&&(X(*player) == 2)){
+                (*infogame).tangan +=1;
+                (*infogame).makanan[(*infogame).tangan] = Y(*player);
+            }
         
         }else
         
         
         if(!strcmp(input,"CT")){
-        
+            (*infogame).tangan = 0;
         }else
         
         
@@ -231,6 +237,8 @@ void getInput(MATRIKS *peta1, MATRIKS *peta2, infopermainan *infogame, char name
         }
     
     ((*infogame).isDoor) = door;    
+    ((*infogame).time) += 1;   
+   
 }
 
 void drawGame(MATRIKS peta1, MATRIKS peta2, infopermainan infogame, char name[]){
@@ -239,6 +247,7 @@ void drawGame(MATRIKS peta1, MATRIKS peta2, infopermainan infogame, char name[])
     
     int i = 1;
     int j = 1;
+    int k = 1;
     
     printf("%s   Money: %d   Life: %d   Time: %d \n",name,infogame.money,infogame.nyawa,infogame.time);
     printf("Waiting Cust  ");
@@ -261,56 +270,53 @@ void drawGame(MATRIKS peta1, MATRIKS peta2, infopermainan infogame, char name[])
         }
         if(j == 1){
             printf("Food Stack \n");
-        }else if(j == 2){
-            printf(" balda,2 \n");
+        }else if((j == 2)&&(infogame.tangan >= 1)){
+            printf("%s\n",makanan(infogame.makanan[j-1]));
+        }else if((j == 3)&&(infogame.tangan >= 2)){
+            printf("%s\n",makanan(infogame.makanan[j-1]));
+        }else if((j == 4)&&(infogame.tangan >= 3)){
+            printf("%s\n",makanan(infogame.makanan[j-1]));
         }else{
             printf("\n");
         }
     }
     printf("\n");
 }
-
-/* Movement - Mengubah posisi Player */
-	/* Matriks disusun dari kecil - besar ke bawah
-	 * Perubahan posisi ke atas -> Y-1
-	 * Perubahan posisi ke bawah -> Y+1
-	 * Tidak ada perubahan kanan kiri, kanan > kiri
-	 * 
-	 */
-void GetPosP(MATRIKS rTamu, point player){
-//mengisi posisi player pada map
-}	  
-void GU(point player){
-//go up
+Customer createCustomer(){
+    Customer temp;
+    temp.sabar = 9;
+    temp.antre = 9;
+    temp.jumlah= 2;
+    return temp;
 }
-void GD(point player){
-//go down
-}
-void GR(point player){
-//go right
-}
-void GL(point player){
-//go Left
-}
-void PLACE(point player, Customer c, List antre){
-//menempatkan pelanggan ke meja duduk sesuai jumlah
-}
-
-/* Give-and-Take */
-void CT(Stack hand){
-//membuang isinya (to be simple, createEmpty)
-}
-void ORDER(Customer c){
-//mengambil pesanan pelanggan, 
-}
-void TAKE(Stack hand, Customer c){
-//mengambil makanan, sesuai posisi produk
-}
-void GIVE(Stack hand, Customer c){
-//memberikan pesanan, harus sesuai pelanggan
+char* makanan(int x){
+    char *temp;
+    switch(x){
+        case 1:
+            temp = "Bubur";
+        break;
+        case 2:
+            temp = "Steak";
+        break;
+        case 3:
+            temp = "Toast";
+        break;
+        case 4:
+            temp = "Jelly";
+        break;
+        case 5:
+            temp = "Tempe";
+        break;
+        case 6:
+            temp = "Penyu";
+        break;
+        case 7:
+            temp = "Bebek";
+        break;
+        case 8:
+            temp = "Kadal";
+        break;
+    }
+    return temp;
 }
 
-
-/* Gameplay */
-void EXIT(){
-}

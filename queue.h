@@ -8,12 +8,13 @@
 
 #include "boolean.h"
 #include <stdlib.h>
+#include "customer.h"
 
 /* *** konstanta *** */
 #define NilQueue 0
 
 /* *** Definisi elemen dan address *** */
-typedef int infotypeQueue;
+typedef Customer infotypeQueue;
 typedef int addressQueue; /* indeks tabel */
 
 /* *** Definisi Type Queue *** */

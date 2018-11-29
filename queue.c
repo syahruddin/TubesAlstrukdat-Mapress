@@ -33,8 +33,8 @@ void CreateEmptyQueue(Queue *Q,int Max){
    Proses : Melakukan alokasi memori dan membuat sebuah Q kosong */
    (*Q).T = (infotypeQueue *) malloc ((Max) * sizeof(infotypeQueue));
    (*Q).MaxEl = Max;
-   HeadQueue(*Q) = Nil;
-   TailQueue(*Q) = Nil;
+   HeadQueue(*Q) = NilQueue;
+   TailQueue(*Q) = NilQueue;
 }
 
 /* *** Destruktor *** */
@@ -81,7 +81,7 @@ void DelQueue(Queue *Q,infotypeQueue *X){
                 (*Q).T[i] = (*Q).T[i+1];
                 i++;
             }
-            Tail(*Q)--;
+            TailQueue(*Q)--;
         }else{
             int j = HeadQueue(*Q);
             while(j < (*Q).MaxEl){
