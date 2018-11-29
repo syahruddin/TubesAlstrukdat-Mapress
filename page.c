@@ -56,6 +56,7 @@ void FrontPage(){
 	char c;
 	char menu;
 	char name[25];
+    name[1] = ' '; //inisiasi dulu, variabel awal2 isinya ga kosong, tapi random
 
 	while (menu != '4'){
 		printf("\n");
@@ -112,9 +113,10 @@ void FrontPage(){
 		if (menu == '1'){
 			printf("Your name: ");
 			scanf("%s", name);
+            StartGame(name);
 		}else if (menu == '2'){
 			if (name[1] != ' '){
-				StartGame();
+				StartGame(name);
 			}else{
 			printf("You don't have any character yet!\n");
 			printf("Please create your character by choose number 1\n");
@@ -132,7 +134,7 @@ void FrontPage(){
 	
 }
 
-void StartGame(){
+void StartGame(char name[]){
 // Menjalankan gamenya
 	
 }

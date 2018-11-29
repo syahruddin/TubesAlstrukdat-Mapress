@@ -9,7 +9,7 @@ void CoverPage();
 void FrontPage();
 // Tampilan awal pada game
 
-void StartGame();
+void StartGame(char name[]);
 // Memulai game (membaca map)
 
 void LoadGame();
