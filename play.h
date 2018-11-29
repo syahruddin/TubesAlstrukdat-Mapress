@@ -27,6 +27,7 @@ typedef struct{ //tiap info di permainan (antrian, uang, makanan, dll )masukin s
 	int isKitchen;
 	int money;
     int time;
+    int isDoor;
 }infopermainan;
 
 void startmain(char name[]);

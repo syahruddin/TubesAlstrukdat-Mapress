@@ -9,6 +9,7 @@ void startmain(char name[]){
     infogame.money = 0;
     infogame.nyawa = 2;
     infogame.time = 0;
+    infogame.isDoor = 0;
     infogame.isKitchen = 0; //boolean yg nentuin apakah player lagi di kitchen atau engga(r tamu)
     point player = MakePoint(5,3);
     
@@ -46,21 +47,44 @@ void BacaFileMap(MATRIKS *peta,char* namafile){
 void getInput(MATRIKS *peta1, MATRIKS *peta2, infopermainan *infogame, char name[], point *player ){
     // buat dapet input selama main
     char input[10];
+    int door = 0;
     printf("Command: ");
     scanf("%s",input);
         if(!strcmp(input,"GU")){
-            if((Y(*player) > 1)){
+            if((Y(*player) > 1)||((*infogame).isDoor)){
                 if((*infogame).isKitchen == 0){
-                    if(((*peta1).Mem[X(*player)][(Y(*player))-1] == ' ')){
+                    if(((*peta1).Mem[X(*player)][(Y(*player))-1] == ' ')||((*peta1).Mem[X(*player)][(Y(*player))-1] == 'D')){
+                        if((*peta1).Mem[X(*player)][(Y(*player))-1] == 'D'){
+                            door =1;
+                        }
                         (*peta1).Mem[X(*player)][Y(*player)] = ' ';
+                        if(((*infogame).isDoor)){
+                            (*peta1).Mem[X(*player)][Y(*player)] = 'D';
+                            
+                            
+                        }
                         Y(*player) -=1;
                         (*peta1).Mem[X(*player)][Y(*player)] = 'P';
                     }
                 }else{
-                    if(((*peta2).Mem[X(*player)][(Y(*player))-1] == ' ')){
+                    if(((*peta2).Mem[X(*player)][(Y(*player))-1] == ' ')||((*peta2).Mem[X(*player)][(Y(*player))-1] == 'D')||((*infogame).isDoor)){
+                        if((*peta2).Mem[X(*player)][(Y(*player))-1] == 'D'){
+                            door =1;
+                        }
                         (*peta2).Mem[X(*player)][Y(*player)] = ' ';
-                        Y(*player) -=1;
-                        (*peta2).Mem[X(*player)][Y(*player)] = 'P';
+                        if(((*infogame).isDoor)){
+                            (*peta2).Mem[X(*player)][Y(*player)] = 'D';
+                            (*infogame).isKitchen = 0;
+                            door = 1;
+                            
+                            X(*player) =5;
+                            Y(*player) =8;
+                            (*peta1).Mem[X(*player)][Y(*player)]  = 'P';
+                            
+                        }else{
+                            Y(*player) -=1;
+                            (*peta2).Mem[X(*player)][Y(*player)] = 'P';
+                        }
                     }
                 }
             }
@@ -68,16 +92,35 @@ void getInput(MATRIKS *peta1, MATRIKS *peta2, infopermainan *infogame, char name
         
         
         if(!strcmp(input,"GD")){
-            if((Y(*player) < 8)){
+            if((Y(*player) < 8)||((*infogame).isDoor)){
                 if((*infogame).isKitchen == 0){
-                    if(((*peta1).Mem[X(*player)][(Y(*player))+1] == ' ')){
+                    if(((*peta1).Mem[X(*player)][(Y(*player))+1] == ' ')||((*peta1).Mem[X(*player)][(Y(*player))+1] == 'D')||((*infogame).isDoor)){
+                        if((*peta1).Mem[X(*player)][(Y(*player))+1] == 'D'){
+                            door =1;
+                        }
                         (*peta1).Mem[X(*player)][Y(*player)] = ' ';
-                        Y(*player) +=1;
-                        (*peta1).Mem[X(*player)][Y(*player)] = 'P';
+                        if(((*infogame).isDoor)){
+                            (*peta1).Mem[X(*player)][Y(*player)] = 'D';
+                            (*infogame).isKitchen = 1;
+                            door = 1;
+                            X(*player) =5;
+                            Y(*player) =1;
+                            (*peta2).Mem[X(*player)][Y(*player)]  = 'P';
+                            
+                        }else{
+                            Y(*player) +=1;
+                            (*peta1).Mem[X(*player)][Y(*player)] = 'P';
+                        }
                     }
                 }else{
-                    if(((*peta2).Mem[X(*player)][(Y(*player))+1] == ' ')){
+                    if(((*peta2).Mem[X(*player)][(Y(*player))+1] == ' ')||((*peta2).Mem[X(*player)][(Y(*player))+1] == 'D')){
+                        if((*peta2).Mem[X(*player)][(Y(*player))+1] == 'D'){
+                            door =1;
+                        }
                         (*peta2).Mem[X(*player)][Y(*player)] = ' ';
+                        if(((*infogame).isDoor)){
+                            (*peta2).Mem[X(*player)][Y(*player)] = 'D';
+                        }
                         Y(*player) +=1;
                         (*peta2).Mem[X(*player)][Y(*player)] = 'P';
                     }
@@ -89,14 +132,26 @@ void getInput(MATRIKS *peta1, MATRIKS *peta2, infopermainan *infogame, char name
         if(!strcmp(input,"GL")){
             if((X(*player) > 1)){
                 if((*infogame).isKitchen == 0){
-                    if(((*peta1).Mem[(X(*player))-1][(Y(*player))] == ' ')){
+                    if(((*peta1).Mem[(X(*player))-1][(Y(*player))] == ' ')||((*peta1).Mem[(X(*player))-1][(Y(*player))] == 'D')){
+                        if((*peta1).Mem[(X(*player))-1][(Y(*player))] == 'D'){
+                            door =1;
+                        }
                         (*peta1).Mem[X(*player)][Y(*player)] = ' ';
+                        if(((*infogame).isDoor)){
+                            (*peta1).Mem[X(*player)][Y(*player)] = 'D';
+                        }
                         X(*player) -=1;
                         (*peta1).Mem[X(*player)][Y(*player)] = 'P';
                     }
                 }else{
-                    if(((*peta2).Mem[(X(*player))-1][(Y(*player))] == ' ')){
+                    if(((*peta2).Mem[(X(*player))-1][(Y(*player))] == ' ')||((*peta2).Mem[(X(*player))-1][(Y(*player))] == 'D')){
+                        if((*peta2).Mem[(X(*player))-1][(Y(*player))] == 'D'){
+                            door =1;
+                        }
                         (*peta2).Mem[X(*player)][Y(*player)] = ' ';
+                        if(((*infogame).isDoor)){
+                            (*peta2).Mem[X(*player)][Y(*player)] = 'D';
+                        }
                         X(*player) -=1;
                         (*peta2).Mem[X(*player)][Y(*player)] = 'P';
                     }
@@ -108,14 +163,26 @@ void getInput(MATRIKS *peta1, MATRIKS *peta2, infopermainan *infogame, char name
         if(!strcmp(input,"GR")){
             if((X(*player) < 8)){
                 if((*infogame).isKitchen == 0){
-                    if(((*peta1).Mem[((X(*player))+1)][(Y(*player))] == ' ')){
+                    if(((*peta1).Mem[((X(*player))+1)][(Y(*player))] == ' ')||((*peta1).Mem[((X(*player))+1)][(Y(*player))] == 'D')){
+                        if((*peta1).Mem[((X(*player))+1)][(Y(*player))] == 'D'){
+                            door =1;
+                        }
                             (*peta1).Mem[X(*player)][Y(*player)] = ' ';
+                            if(((*infogame).isDoor)){
+                                (*peta1).Mem[X(*player)][Y(*player)] = 'D';
+                            }
                             X(*player) +=1;
                             (*peta1).Mem[X(*player)][Y(*player)] = 'P';
                     }
                 }else{
-                    if(((*peta2).Mem[((X(*player))+1)][(Y(*player))] == ' ')){
+                    if(((*peta2).Mem[((X(*player))+1)][(Y(*player))] == ' ')||((*peta2).Mem[((X(*player))+1)][(Y(*player))] == 'D')){
+                        if((*peta2).Mem[((X(*player))+1)][(Y(*player))] == 'D'){
+                            door =1;
+                        }
                         (*peta2).Mem[X(*player)][Y(*player)] = ' ';
+                        if(((*infogame).isDoor)){
+                            (*peta2).Mem[X(*player)][Y(*player)] = 'D';
+                        }
                         X(*player) +=1;
                         (*peta2).Mem[X(*player)][Y(*player)] = 'P';
                     }
@@ -163,7 +230,7 @@ void getInput(MATRIKS *peta1, MATRIKS *peta2, infopermainan *infogame, char name
         
         }
     
-        
+    ((*infogame).isDoor) = door;    
 }
 
 void drawGame(MATRIKS peta1, MATRIKS peta2, infopermainan infogame, char name[]){
