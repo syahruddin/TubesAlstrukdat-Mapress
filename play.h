@@ -2,9 +2,31 @@
 
 #ifndef PLAY_H
 #define PLAY_H
+#include "matriks.h"
+#include "mesin_kar.h"
+#include "point.h"
+#include "listlinier.h"
+#include "boolean.h"
+#include "jam.h"
+#include "mesin_kata.h"
+#include "point.h"
+#include "stacklist.h"
+#include <stdio.h>
+
+
+
+/* Tipe Bentukan baru */
+typedef struct Customer{
+	int type;
+	int time;
+	int jumlah;
+}Customer;
 
 void startgame(char name[], char map[]);
 // yang dijalanin
+
+void BacaFileMap(MATRIKS *peta,char *namafile);
+//masukin dari file peta ke matrix
 
 void getInput();
 // buat dapet input selama main
