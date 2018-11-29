@@ -13,7 +13,7 @@
 #include "stacklist.h"
 #include <stdio.h>
 
-
+char CC;
 
 /* Tipe Bentukan baru */
 typedef struct Customer{
@@ -25,13 +25,13 @@ typedef struct Customer{
 void startmain(char name[]);
 // yang dijalanin
 
-void BacaFileMap(MATRIKS *peta,char *namafile);
+void BacaFileMap(MATRIKS *peta,char* namafile);
 //masukin dari file peta ke matrix
 
 void getInput();
 // buat dapet input selama main
 
-void drawGame();
+void drawGame(MATRIKS peta1, MATRIKS peta2);
 // gambar semua interface pertick
 
 /* Movement - Mengubah posisi Player */

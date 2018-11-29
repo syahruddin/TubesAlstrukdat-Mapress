@@ -130,7 +130,7 @@ void FrontPage(){
 			LoadGame();
 		}
 	}
-	Quit();
+	Exit();
 	
 }
 
@@ -146,8 +146,6 @@ void LoadGame(){
 	printf("Enter the file name that you want to load: ");
 	scanf("%s", Map);
 	BacaMap(Map);
-	FrontPage();
-	
 }
 
 void BacaMap(char *Map){
@@ -159,15 +157,10 @@ void TulisMap(char *Map){
 }
 
 
-void Quit(){
+void Exit(){
 // Keluar dari game
-	char Choose;
-
 	system("cls");
-	printf("   Are you sure? (Y/N)  : ");
-	scanf("%c", &Choose);
 	
-	if (Choose == 'Y'){
 		printf("  _______ _                 _     __     __           _ \n");
 		printf(" |__   __| |               | |    \\ \\   / /          | |\n");
 		printf("    | |  | |__   __ _ _ __ | | __  \\ \\_/ /__  _   _  | |\n");
@@ -175,11 +168,6 @@ void Quit(){
 		printf("    | |  | | | | (_| | | | |   <     | | (_) | |_| | |_|\n");
 		printf("    |_|  |_| |_|\\__,_|_| |_|_|\\_\\    |_|\\___/ \\__,_| (_)\n");
 		printf("\n\n");
-	} else if (Choose == 'N'){
-		FrontPage();
-	} else{
-		Quit();
-	}
 }
 	
 void GameOver(){

@@ -22,7 +22,7 @@ void BacaMap();
 void TulisMap();
 // Menampilkan Map
 
-void Quit();
+void Exit();
 // Keluar dari game
 
 void GameOver();
