@@ -12,6 +12,10 @@ void startmain(char name[]){
     infogame.nyawa = 2;
     infogame.time = 0;
     infogame.isDoor = 0;
+    infogame.meja.penduduk[1] = 0;
+    infogame.meja.penduduk[2] = 0;
+    infogame.meja.penduduk[3] = 0;
+    infogame.meja.penduduk[4] = 0;
     infogame.isKitchen = 0; //boolean yg nentuin apakah player lagi di kitchen atau engga(r tamu)
     point player = MakePoint(5,3);
     AddQueue(&infogame.antrian,createCustomer());
@@ -213,7 +217,18 @@ void getInput(MATRIKS *peta1, MATRIKS *peta2, infopermainan *infogame, char name
         
         
         if(!strcmp(input,"PLACE")){
-        
+            if(      (!IsEmptyQueue((*infogame).antrian))    &&       (((X(*player) <= 3) &&     (!(((Y(*player) == 4)||(Y(*player) == 5))&&(!(X(*player) == 2))  ) )    )      ||          ((X(*player) >= 6)&&((Y(*player) > 5 )&&(Y(*player) < 4))   &&   (!((Y(*player) == 5) && (!((Y(*player) == 2)||(Y(*player) == 7))) )   ))      )         ){
+                
+                
+                if(((*infogame).meja.penduduk[quadran(*player)]) == 0){
+                    Customer getter;
+                    DelQueue((*infogame).antrian),&getter);
+                    (*infogame).meja.penduduk[quadran(*player)] = getter.jumlah;
+                    (*infogame).meja.makanan[quadran(*player)] = 2;
+                    (*infogame).meja.kesabaran[quadran(*player)] = 5;
+                }
+                
+            }
         }else
         
         
@@ -285,7 +300,6 @@ void drawGame(MATRIKS peta1, MATRIKS peta2, infopermainan infogame, char name[])
 Customer createCustomer(){
     Customer temp;
     temp.sabar = 9;
-    temp.antre = 9;
     temp.jumlah= 2;
     return temp;
 }
@@ -317,6 +331,22 @@ char* makanan(int x){
             temp = "Kadal";
         break;
     }
+    return temp;
+}
+int quadran(point a){
+    int temp;
+    if(X(a) >= 4){
+        if(Y(a) > 4){
+            temp = 4;
+        }else{
+            temp = 1;
+        }
+    }else if(Y(a) > 4){
+            temp = 3;
+        }else{
+            temp = 2;
+        }
+
     return temp;
 }
 

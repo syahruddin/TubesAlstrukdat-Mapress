@@ -7,7 +7,6 @@
 typedef struct Customer{
     
 	int sabar;
-	int antre;
 	int jumlah;
 }Customer;
 

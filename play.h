@@ -16,6 +16,11 @@
 
 char CC;
 
+typedef struct{
+    int makanan[5];
+    int penduduk[5];
+    int kesabaran[5];
+}Meja;
 
 typedef struct{ //tiap info di permainan (antrian, uang, makanan, dll )masukin sini aja biar gampang pindahinnya
 	int nyawa;
@@ -23,7 +28,8 @@ typedef struct{ //tiap info di permainan (antrian, uang, makanan, dll )masukin s
 	int money;
     int time;
     int isDoor;
-    int makanan[4];
+    int makanan[5];
+    Meja meja;
     int tangan;
     Queue antrian;
 }infopermainan;
@@ -42,5 +48,6 @@ void drawGame(MATRIKS peta1, MATRIKS peta2, infopermainan infogame,char name[]);
 
 Customer createCustomer();
 char* makanan(int x);
+int quadran(point a);
 
 #endif
