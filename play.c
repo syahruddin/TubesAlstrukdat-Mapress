@@ -6,7 +6,10 @@
 void startmain(char name[]){
 // yang dijalanin
     infopermainan infogame;
-    CreateEmptyQueue(&infogame.antrian,6);
+    Queue antrian;
+    Queue nunggumakan;
+    CreateEmptyQueue(&antrian,6);
+    
     infogame.money = 0;
     infogame.tangan = 0;
     infogame.nyawa = 2;
@@ -18,7 +21,7 @@ void startmain(char name[]){
     infogame.meja.penduduk[4] = 0;
     infogame.isKitchen = 0; //boolean yg nentuin apakah player lagi di kitchen atau engga(r tamu)
     point player = MakePoint(5,3);
-    AddQueue(&infogame.antrian,createCustomer());
+    AddQueue(&antrian,createCustomer());
     
     MATRIKS petaTamu, petaDapur;
     BacaFileMap(&petaTamu,"ruangtamu.txt");
@@ -28,8 +31,8 @@ void startmain(char name[]){
     
     
     while(1){
-        drawGame(petaTamu,petaDapur,infogame,name);
-        getInput(&petaTamu,&petaDapur,&infogame,name,&player);
+        drawGame(petaTamu,petaDapur,infogame,name,&antrian);
+        getInput(&petaTamu,&petaDapur,&infogame,name,&player,&antrian);
     }
 }
 void BacaFileMap(MATRIKS *peta,char* namafile){
@@ -50,7 +53,7 @@ void BacaFileMap(MATRIKS *peta,char* namafile){
     (*peta).NKolEff = 8;
 }
 
-void getInput(MATRIKS *peta1, MATRIKS *peta2, infopermainan *infogame, char name[], point *player ){
+void getInput(MATRIKS *peta1, MATRIKS *peta2, infopermainan *infogame, char name[], point *player , Queue *antrian){
     // buat dapet input selama main
     char input[10];
     int door = 0;
@@ -198,6 +201,13 @@ void getInput(MATRIKS *peta1, MATRIKS *peta2, infopermainan *infogame, char name
         
         
         if(!strcmp(input,"ORDER")){
+            if(      (!IsEmptyQueue(*antrian))    &&       (((X(*player) <= 3)  &&     (!(((Y(*player) == 4)||(Y(*player) == 5))&&(!(X(*player) == 2))  ) )    )      ||          ((X(*player) >= 6)&&((Y(*player) > 5 )||(Y(*player) < 4))   &&   (!((Y(*player) == 5) && (!((Y(*player) == 2)||(Y(*player) == 7))) )   ))      )         ){
+                
+                
+                if(((*infogame).meja.penduduk[quadran(*player)]) != 0){
+                    (*infogame).meja.makanan[quadran(*player)] = 2; //nanti randomin
+                }
+            }
         
         }else
         
@@ -217,15 +227,64 @@ void getInput(MATRIKS *peta1, MATRIKS *peta2, infopermainan *infogame, char name
         
         
         if(!strcmp(input,"PLACE")){
-            if(      (!IsEmptyQueue((*infogame).antrian))    &&       (((X(*player) <= 3) &&     (!(((Y(*player) == 4)||(Y(*player) == 5))&&(!(X(*player) == 2))  ) )    )      ||          ((X(*player) >= 6)&&((Y(*player) > 5 )&&(Y(*player) < 4))   &&   (!((Y(*player) == 5) && (!((Y(*player) == 2)||(Y(*player) == 7))) )   ))      )         ){
+            if(      (!IsEmptyQueue(*antrian))    &&       (((X(*player) <= 3)  &&     (!(((Y(*player) == 4)||(Y(*player) == 5))&&(!(X(*player) == 2))  ) )    )      ||          ((X(*player) >= 6)&&((Y(*player) > 5 )||(Y(*player) < 4))   &&   (!((Y(*player) == 5) && (!((Y(*player) == 2)||(Y(*player) == 7))) )   ))      )         ){
                 
                 
                 if(((*infogame).meja.penduduk[quadran(*player)]) == 0){
-                    Customer getter;
-                    DelQueue((*infogame).antrian),&getter);
-                    (*infogame).meja.penduduk[quadran(*player)] = getter.jumlah;
-                    (*infogame).meja.makanan[quadran(*player)] = 2;
-                    (*infogame).meja.kesabaran[quadran(*player)] = 5;
+                    if((quadran(*player) == 2) || (quadran(*player) == 3) || (InfoHeadQueue(*antrian).jumlah == 2)){
+                        Customer getter;
+                        
+                        DelQueue(antrian,&getter);
+                        (*infogame).meja.penduduk[quadran(*player)] = getter.jumlah;
+                        
+                        (*infogame).meja.kesabaran[quadran(*player)] = 15; 
+                        
+                        switch (quadran(*player)){
+                            case 1:
+                                if(getter.jumlah == 2){
+                                    (*peta1).Mem[8][2] = 'C';
+                                    (*peta1).Mem[6][2] = 'C';
+                                }
+                                
+                            break;
+                            
+                            case 2:
+                            if(getter.jumlah == 2){
+                                    (*peta1).Mem[2][1] = 'C';
+                                    (*peta1).Mem[1][2] = 'C';
+                                }else{
+                                    (*peta1).Mem[2][1] = 'C';
+                                    (*peta1).Mem[1][2] = 'C';
+                                    (*peta1).Mem[2][3] = 'C';
+                                    (*peta1).Mem[3][2] = 'C';
+                                }
+                            
+                            break;
+                            
+                            case 3:
+                            if(getter.jumlah == 2){
+                                    (*peta1).Mem[2][6] = 'C';
+                                    (*peta1).Mem[2][8] = 'C';
+                                }else{
+                                    (*peta1).Mem[2][6] = 'C';
+                                    (*peta1).Mem[2][8] = 'C';
+                                    (*peta1).Mem[3][7] = 'C';
+                                    (*peta1).Mem[1][7] = 'C';
+                                }
+                            
+                            break;
+                            
+                            case 4:
+                            if(getter.jumlah == 2){
+                                    (*peta1).Mem[6][7] = 'C';
+                                    (*peta1).Mem[8][7] = 'C';
+                                }
+                            
+                            break;
+                            
+                            
+                        }
+                    }
                 }
                 
             }
@@ -233,7 +292,19 @@ void getInput(MATRIKS *peta1, MATRIKS *peta2, infopermainan *infogame, char name
         
         
         if(!strcmp(input,"GIVE")){
-        
+            if(      (!IsEmptyQueue(*antrian))    &&       (((X(*player) <= 3)  &&     (!(((Y(*player) == 4)||(Y(*player) == 5))&&(!(X(*player) == 2))  ) )    )      ||          ((X(*player) >= 6)&&((Y(*player) > 5 )||(Y(*player) < 4))   &&   (!((Y(*player) == 5) && (!((Y(*player) == 2)||(Y(*player) == 7))) )   ))      )         ){
+                
+                
+                if(((*infogame).meja.penduduk[quadran(*player)]) != 0){
+                    if(((*infogame).makanan[(*infogame).tangan]) == (*infogame).meja.makanan[quadran(*player)]){
+                        (*infogame).tangan -= 1;
+                        (*infogame).money += 50;
+                        (*infogame).meja.makanan[quadran(*player)] = 0;
+                        (*infogame).meja.penduduk[quadran(*player)] = 0;
+                    }
+                }
+            }
+            
         }else
         
         
@@ -256,7 +327,7 @@ void getInput(MATRIKS *peta1, MATRIKS *peta2, infopermainan *infogame, char name
    
 }
 
-void drawGame(MATRIKS peta1, MATRIKS peta2, infopermainan infogame, char name[]){
+void drawGame(MATRIKS peta1, MATRIKS peta2, infopermainan infogame, char name[], Queue *antrian){
     // gambar semua interface pertick
     
     

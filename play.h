@@ -31,7 +31,6 @@ typedef struct{ //tiap info di permainan (antrian, uang, makanan, dll )masukin s
     int makanan[5];
     Meja meja;
     int tangan;
-    Queue antrian;
 }infopermainan;
 
 void startmain(char name[]);
@@ -40,10 +39,10 @@ void startmain(char name[]);
 void BacaFileMap(MATRIKS *peta,char* namafile);
 //masukin dari file peta ke matrix
 
-void getInput(MATRIKS *peta1, MATRIKS *peta2, infopermainan *infogame, char name[], point *player);
+void getInput(MATRIKS *peta1, MATRIKS *peta2, infopermainan *infogame, char name[], point *player, Queue *antrian);
 // buat dapet input selama main
 
-void drawGame(MATRIKS peta1, MATRIKS peta2, infopermainan infogame,char name[]);
+void drawGame(MATRIKS peta1, MATRIKS peta2, infopermainan infogame,char name[], Queue *antrian);
 // gambar semua interface pertick
 
 Customer createCustomer();
