@@ -20,6 +20,10 @@ void startmain(char name[]){
     infogame.meja.penduduk[2] = 0;
     infogame.meja.penduduk[3] = 0;
     infogame.meja.penduduk[4] = 0;
+    infogame.meja.makanan[1] = 0;
+    infogame.meja.makanan[2] = 0;
+    infogame.meja.makanan[3] = 0;
+    infogame.meja.makanan[4] = 0;
     infogame.isKitchen = 0; //boolean yg nentuin apakah player lagi di kitchen atau engga(r tamu)
     point player = MakePoint(5,3);
     AddQueue(&antrian,createCustomer());
@@ -343,9 +347,21 @@ void drawGame(MATRIKS peta1, MATRIKS peta2, infopermainan infogame, char name[],
         if(j == 2){
             printf("0             ");
         }else if(j == 5){
-            printf("Order         ");
-        }else if(j == 6){
-            printf("%s,        ",infogame.meja.makanan[]);
+            printf("Order");
+            if (infogame.meja.makanan[1] != 0){
+                printf("%s",makanan(infogame.meja.makanan[1]));
+            }else{printf("     ");
+            }
+        
+        }else if((j == 6)&&(infogame.meja.makanan[2] != 0)){
+            printf("%s,        ",makanan(infogame.meja.makanan[2]));
+        }else if((j == 7)&&(infogame.meja.makanan[3] != 0)){
+            printf("%s,        ",makanan(infogame.meja.makanan[3]));
+        }else if((j == 8)&&(infogame.meja.makanan[4] != 0)){
+            printf("%s,        ",makanan(infogame.meja.makanan[4]));
+            
+            
+            
         }else if(j != 1){
             printf("              ");
         }
