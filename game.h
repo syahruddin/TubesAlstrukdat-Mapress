@@ -30,6 +30,7 @@ extern MATRIKS dapur;		//map tempat pesanan diambbil, 	ADT Matriks
 extern List antre;			//antrean pelanggan, 			ADT Queue
 extern TabInt pesanan;		//jenis pesanan, 				ADT Array
 extern point player;		//posisi pemain					ADT Point
+extern char Map;			//segala info game dalam bentu .txt nyawa, waktu, posisi, map mana, dll
 
 
 /* Inisialisasi */
@@ -68,7 +69,15 @@ void GIVE(Stack hand, Customer c);
 
 
 /* Gameplay */
-void EXIT();
+void StartGame();
+//Memulai game
+
+void BacaMap(char *Map){
+//Membaca Map,dll. bisa tau nama = siapa, nyawa dan waktu = berapa, posisi = dimana, dll
+void TulisMap(char *Map){
+//Menampilkan Map dan seluruh kejadian BacaMap
+
+/*void EXIT(); <== dah aku bikin di page.h sama page.c tapi namanya Quit(); nanti aku ubah -Sul*/
 
 #endif
 
