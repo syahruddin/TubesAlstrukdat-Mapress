@@ -1,5 +1,6 @@
 #include "play.h"
 #include <stdio.h>
+#include <string.h>
 
 
 void startmain(char name[]){
@@ -21,7 +22,7 @@ void startmain(char name[]){
     
     while(1){
         drawGame(petaTamu,petaDapur,infogame,name);
-        getInput();
+        getInput(&petaTamu,&petaDapur,&infogame,name,&player);
     }
 }
 void BacaFileMap(MATRIKS *peta,char* namafile){
@@ -42,10 +43,103 @@ void BacaFileMap(MATRIKS *peta,char* namafile){
     (*peta).NKolEff = 8;
 }
 
-void getInput(){
+void getInput(MATRIKS *peta1, MATRIKS *peta2, infopermainan *infogame, char name[], point *player ){
     // buat dapet input selama main
-    char* input[10];
+    char input[10];
+    printf("Command: ");
     scanf("%s",input);
+        if(!strcmp(input,"GU")){
+            if((*infogame).isKitchen == 0){
+                (*peta1).Mem[X(*player)][Y(*player)] = ' ';
+                Y(*player) -=1;
+                (*peta1).Mem[X(*player)][Y(*player)] = 'P';
+            }else{
+                (*peta2).Mem[X(*player)][Y(*player)] = ' ';
+                Y(*player) -=1;
+                (*peta2).Mem[X(*player)][Y(*player)] = 'P';
+            }
+        }else
+        
+        
+        if(!strcmp(input,"GD")){
+            if((*infogame).isKitchen == 0){
+                (*peta1).Mem[X(*player)][Y(*player)] = ' ';
+                Y(*player) +=1;
+                (*peta1).Mem[X(*player)][Y(*player)] = 'P';
+            }else{
+                (*peta2).Mem[X(*player)][Y(*player)] = ' ';
+                Y(*player) +=1;
+                (*peta2).Mem[X(*player)][Y(*player)] = 'P';
+            }
+        }else
+        
+        
+        if(!strcmp(input,"GL")){
+            if((*infogame).isKitchen == 0){
+                (*peta1).Mem[X(*player)][Y(*player)] = ' ';
+                X(*player) -=1;
+                (*peta1).Mem[X(*player)][Y(*player)] = 'P';
+            }else{
+                (*peta2).Mem[X(*player)][Y(*player)] = ' ';
+                X(*player) -=1;
+                (*peta2).Mem[X(*player)][Y(*player)] = 'P';
+            }
+        }else
+        
+        
+        if(!strcmp(input,"GR")){
+            if((*infogame).isKitchen == 0){
+                (*peta1).Mem[X(*player)][Y(*player)] = ' ';
+                X(*player) +=1;
+                (*peta1).Mem[X(*player)][Y(*player)] = 'P';
+            }else{
+                (*peta2).Mem[X(*player)][Y(*player)] = ' ';
+                X(*player) +=1;
+                (*peta2).Mem[X(*player)][Y(*player)] = 'P';
+            }
+        }else
+        
+        
+        if(!strcmp(input,"ORDER")){
+        
+        }else
+        
+        
+        if(!strcmp(input,"TAKE")){
+        
+        }else
+        
+        
+        if(!strcmp(input,"CT")){
+        
+        }else
+        
+        
+        if(!strcmp(input,"PLACE")){
+        
+        }else
+        
+        
+        if(!strcmp(input,"GIVE")){
+        
+        }else
+        
+        
+        if(!strcmp(input,"SAVE")){
+        
+        }else
+        
+        
+        if(!strcmp(input,"LOAD")){
+        
+        }else
+        
+        
+        if(!strcmp(input,"EXIT")){
+        
+        }
+    
+        
 }
 
 void drawGame(MATRIKS peta1, MATRIKS peta2, infopermainan infogame, char name[]){
@@ -110,7 +204,6 @@ void GL(point player){
 void PLACE(point player, Customer c, List antre){
 //menempatkan pelanggan ke meja duduk sesuai jumlah
 }
-
 
 /* Give-and-Take */
 void CT(Stack hand){

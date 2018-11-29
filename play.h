@@ -35,7 +35,7 @@ void startmain(char name[]);
 void BacaFileMap(MATRIKS *peta,char* namafile);
 //masukin dari file peta ke matrix
 
-void getInput();
+void getInput(MATRIKS *peta1, MATRIKS *peta2, infopermainan *infogame, char name[], point *player);
 // buat dapet input selama main
 
 void drawGame(MATRIKS peta1, MATRIKS peta2, infopermainan infogame,char name[]);
