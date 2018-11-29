@@ -3,6 +3,8 @@
 
 int main(){
     FrontPage();
+    Credit();
+    
     
     return 0;
 }

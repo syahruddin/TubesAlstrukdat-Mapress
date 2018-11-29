@@ -25,9 +25,6 @@ void TulisMap();
 void Exit();
 // Keluar dari game
 
-void GameOver();
-// Menampilkan Tulisan Game Over
-
 void Credit();
 // Menampilkan credit created by:
 
