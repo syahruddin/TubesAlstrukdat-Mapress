@@ -21,7 +21,7 @@ void AlokasiStack (address *P, infotypeStack X){
 // F.S. Alamat P dialokasi, jika berhasil maka Info(P) = X dan Next(P) = Nil 
 // P = Nil jika alokasi gagal 
     (*P) = (address) malloc (sizeof (ElmtStack));
-    if((*P) != Nil){
+    if((*P) != NilStack){
         InfoStack(*P) = X;
         NextStack(*P) = NilStack;
     }else

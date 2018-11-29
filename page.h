@@ -2,7 +2,7 @@
 #define PAGE_H
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "play.h"
 
 void CoverPage();
 // Menampilkan "Diner Dash" wkwkwkw

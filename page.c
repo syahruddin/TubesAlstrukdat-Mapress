@@ -136,6 +136,7 @@ void FrontPage(){
 
 void StartGame(char name[]){
 // Menjalankan gamenya
+    startmain(name);
 	
 }
 

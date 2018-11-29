@@ -2,8 +2,16 @@
 #include <stdio.h>
 
 
-void startgame(char name[], char map[]){
+void startmain(char name[]){
 // yang dijalanin
+    MATRIKS petaTamu, petaDapur;
+    BacaFileMap(&petaTamu,"ruangtamu.txt");
+    BacaFileMap(&petaDapur,"kitchen.txt");
+    TulisMATRIKS(petaTamu);
+    printf("\n");
+    TulisMATRIKS(petaDapur);
+    for(;;){
+    }
 }
 void BacaFileMap(MATRIKS *peta,char *namafile){
 //masukin dari file peta ke matrix

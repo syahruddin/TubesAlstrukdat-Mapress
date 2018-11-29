@@ -22,7 +22,7 @@ typedef struct Customer{
 	int jumlah;
 }Customer;
 
-void startgame(char name[], char map[]);
+void startmain(char name[]);
 // yang dijalanin
 
 void BacaFileMap(MATRIKS *peta,char *namafile);
