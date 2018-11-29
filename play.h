@@ -17,10 +17,17 @@ char CC;
 
 /* Tipe Bentukan baru */
 typedef struct Customer{
+    
 	int type;
 	int time;
 	int jumlah;
 }Customer;
+typedef struct{ //tiap info di permainan (antrian, uang, makanan, dll )masukin sini aja biar gampang pindahinnya
+	int nyawa;
+	int isKitchen;
+	int money;
+    int time;
+}infopermainan;
 
 void startmain(char name[]);
 // yang dijalanin
@@ -31,7 +38,7 @@ void BacaFileMap(MATRIKS *peta,char* namafile);
 void getInput();
 // buat dapet input selama main
 
-void drawGame(MATRIKS peta1, MATRIKS peta2);
+void drawGame(MATRIKS peta1, MATRIKS peta2, infopermainan infogame,char name[]);
 // gambar semua interface pertick
 
 /* Movement - Mengubah posisi Player */

@@ -4,11 +4,24 @@
 
 void startmain(char name[]){
 // yang dijalanin
+    infopermainan infogame;
+    infogame.money = 0;
+    infogame.nyawa = 2;
+    infogame.time = 0;
+    infogame.isKitchen = 0; //boolean yg nentuin apakah player lagi di kitchen atau engga(r tamu)
+    point player = MakePoint(5,3);
+    
+    
     MATRIKS petaTamu, petaDapur;
     BacaFileMap(&petaTamu,"ruangtamu.txt");
     BacaFileMap(&petaDapur,"kitchen.txt");
-    drawGame(petaTamu,petaDapur);
-    for(;;){
+    
+    petaTamu.Mem[X(player)][Y(player)] = 'P';
+    
+    
+    while(1){
+        drawGame(petaTamu,petaDapur,infogame,name);
+        getInput();
     }
 }
 void BacaFileMap(MATRIKS *peta,char* namafile){
@@ -31,25 +44,45 @@ void BacaFileMap(MATRIKS *peta,char* namafile){
 
 void getInput(){
     // buat dapet input selama main
+    char* input[10];
+    scanf("%s",input);
 }
 
-void drawGame(MATRIKS peta1, MATRIKS peta2){
+void drawGame(MATRIKS peta1, MATRIKS peta2, infopermainan infogame, char name[]){
     // gambar semua interface pertick
+    
+    
     int i = 1;
     int j = 1;
+    
+    printf("%s   Money: %d   Life: %d   Time: %d \n",name,infogame.money,infogame.nyawa,infogame.time);
+    printf("Waiting Cust  ");
     for(j = 1; j <=8; j++){
-        for(i = 1; i<=8;i++){
-            printf("%c",peta1.Mem[i][j]);
+        if(j == 2){
+            printf("0             ");
+        }else if(j == 5){
+            printf("Order         ");
+        }else if(j == 6){
+            printf("burger,2      ");
+        }else if(j != 1){
+            printf("              ");
         }
-        printf("\n");
+        for(i = 1; i<=8;i++){
+            if(infogame.isKitchen){
+                printf("%c  ",peta2.Mem[i][j]);
+            }else{
+                printf("%c  ",peta1.Mem[i][j]);
+            }
+        }
+        if(j == 1){
+            printf("Food Stack \n");
+        }else if(j == 2){
+            printf(" balda,2 \n");
+        }else{
+            printf("\n");
+        }
     }
     printf("\n");
-    for(j = 1; j <=8; j++){
-        for(i = 1; i<=8;i++){
-            printf("%c",peta2.Mem[i][j]);
-        }
-        printf("\n");
-    }
 }
 
 /* Movement - Mengubah posisi Player */
