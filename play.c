@@ -49,53 +49,77 @@ void getInput(MATRIKS *peta1, MATRIKS *peta2, infopermainan *infogame, char name
     printf("Command: ");
     scanf("%s",input);
         if(!strcmp(input,"GU")){
-            if((*infogame).isKitchen == 0){
-                (*peta1).Mem[X(*player)][Y(*player)] = ' ';
-                Y(*player) -=1;
-                (*peta1).Mem[X(*player)][Y(*player)] = 'P';
-            }else{
-                (*peta2).Mem[X(*player)][Y(*player)] = ' ';
-                Y(*player) -=1;
-                (*peta2).Mem[X(*player)][Y(*player)] = 'P';
+            if((Y(*player) > 1)){
+                if((*infogame).isKitchen == 0){
+                    if(((*peta1).Mem[X(*player)][(Y(*player))-1] == ' ')){
+                        (*peta1).Mem[X(*player)][Y(*player)] = ' ';
+                        Y(*player) -=1;
+                        (*peta1).Mem[X(*player)][Y(*player)] = 'P';
+                    }
+                }else{
+                    if(((*peta2).Mem[X(*player)][(Y(*player))-1] == ' ')){
+                        (*peta2).Mem[X(*player)][Y(*player)] = ' ';
+                        Y(*player) -=1;
+                        (*peta2).Mem[X(*player)][Y(*player)] = 'P';
+                    }
+                }
             }
         }else
         
         
         if(!strcmp(input,"GD")){
-            if((*infogame).isKitchen == 0){
-                (*peta1).Mem[X(*player)][Y(*player)] = ' ';
-                Y(*player) +=1;
-                (*peta1).Mem[X(*player)][Y(*player)] = 'P';
-            }else{
-                (*peta2).Mem[X(*player)][Y(*player)] = ' ';
-                Y(*player) +=1;
-                (*peta2).Mem[X(*player)][Y(*player)] = 'P';
+            if((Y(*player) < 8)){
+                if((*infogame).isKitchen == 0){
+                    if(((*peta1).Mem[X(*player)][(Y(*player))+1] == ' ')){
+                        (*peta1).Mem[X(*player)][Y(*player)] = ' ';
+                        Y(*player) +=1;
+                        (*peta1).Mem[X(*player)][Y(*player)] = 'P';
+                    }
+                }else{
+                    if(((*peta2).Mem[X(*player)][(Y(*player))+1] == ' ')){
+                        (*peta2).Mem[X(*player)][Y(*player)] = ' ';
+                        Y(*player) +=1;
+                        (*peta2).Mem[X(*player)][Y(*player)] = 'P';
+                    }
+                }
             }
         }else
         
         
         if(!strcmp(input,"GL")){
-            if((*infogame).isKitchen == 0){
-                (*peta1).Mem[X(*player)][Y(*player)] = ' ';
-                X(*player) -=1;
-                (*peta1).Mem[X(*player)][Y(*player)] = 'P';
-            }else{
-                (*peta2).Mem[X(*player)][Y(*player)] = ' ';
-                X(*player) -=1;
-                (*peta2).Mem[X(*player)][Y(*player)] = 'P';
+            if((X(*player) > 1)){
+                if((*infogame).isKitchen == 0){
+                    if(((*peta1).Mem[(X(*player))-1][(Y(*player))] == ' ')){
+                        (*peta1).Mem[X(*player)][Y(*player)] = ' ';
+                        X(*player) -=1;
+                        (*peta1).Mem[X(*player)][Y(*player)] = 'P';
+                    }
+                }else{
+                    if(((*peta2).Mem[(X(*player))-1][(Y(*player))] == ' ')){
+                        (*peta2).Mem[X(*player)][Y(*player)] = ' ';
+                        X(*player) -=1;
+                        (*peta2).Mem[X(*player)][Y(*player)] = 'P';
+                    }
+                }
             }
         }else
         
         
         if(!strcmp(input,"GR")){
-            if((*infogame).isKitchen == 0){
-                (*peta1).Mem[X(*player)][Y(*player)] = ' ';
-                X(*player) +=1;
-                (*peta1).Mem[X(*player)][Y(*player)] = 'P';
-            }else{
-                (*peta2).Mem[X(*player)][Y(*player)] = ' ';
-                X(*player) +=1;
-                (*peta2).Mem[X(*player)][Y(*player)] = 'P';
+            if((X(*player) < 8)){
+                if((*infogame).isKitchen == 0){
+                    if(((*peta1).Mem[((X(*player))+1)][(Y(*player))] == ' ')){
+                            (*peta1).Mem[X(*player)][Y(*player)] = ' ';
+                            X(*player) +=1;
+                            (*peta1).Mem[X(*player)][Y(*player)] = 'P';
+                    }
+                }else{
+                    if(((*peta2).Mem[((X(*player))+1)][(Y(*player))] == ' ')){
+                        (*peta2).Mem[X(*player)][Y(*player)] = ' ';
+                        X(*player) +=1;
+                        (*peta2).Mem[X(*player)][Y(*player)] = 'P';
+                    }
+                }
             }
         }else
         
