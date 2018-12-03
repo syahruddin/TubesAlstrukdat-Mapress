@@ -2,8 +2,8 @@
 #include <stdio.h>
 
 int main(){
-    FrontPage();
-    Credit();
+    CoverPage();
+    
     
     return 0;
 }

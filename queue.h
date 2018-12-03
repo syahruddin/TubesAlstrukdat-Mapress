@@ -8,19 +8,20 @@
 
 #include "boolean.h"
 #include <stdlib.h>
+#include "customer.h"
 
 /* *** konstanta *** */
-#define Nil 0
+#define NilQueue 0
 
 /* *** Definisi elemen dan address *** */
-typedef int infotype;
-typedef int address; /* indeks tabel */
+typedef Customer infotypeQueue;
+typedef int addressQueue; /* indeks tabel */
 
 /* *** Definisi Type Queue *** */
 typedef struct {
-    infotype *T; /* tabel penyimpan elemen */
-    address HEAD; /* alamat penghapusan */
-    address TAIL; /* alamat penambahan */
+    infotypeQueue *T; /* tabel penyimpan elemen */
+    addressQueue HEAD; /* alamat penghapusan */
+    addressQueue TAIL; /* alamat penambahan */
     int MaxEl; /* maksimum banyaknya elemen queue */
 } Queue;
 
@@ -28,23 +29,23 @@ typedef struct {
 /* Catatan implementasi: T[0] tidak pernah dipakai */
 
 /* Definisi akses dengan Selektor */
-#define Head(Q) (Q).HEAD
-#define Tail(Q) (Q).TAIL
-#define InfoHead(Q) (Q).T[(Q).HEAD]
-#define InfoTail(Q) (Q).T[(Q).TAIL]
-#define MaxEl(Q) (Q).MaxEl
+#define HeadQueue(Q) (Q).HEAD
+#define TailQueue(Q) (Q).TAIL
+#define InfoHeadQueue(Q) (Q).T[(Q).HEAD]
+#define InfoTailQueue(Q) (Q).T[(Q).TAIL]
+#define MaxElQueue(Q) (Q).MaxEl
 
 /* *** Predikat Pemeriksaan Kondisi Queue *** */
-boolean IsEmpty(Queue Q);
+boolean IsEmptyQueue(Queue Q);
 /* Mengirim true jika Q kosong */
-boolean IsFull(Queue Q);
+boolean IsFullQueue(Queue Q);
 /* Mengirim true jika tabel penampung elemen Q sudah penuh yaitu mengandung
 MaxEl elemen */
-int NBElmt(Queue Q);
+int NBElmtQueue(Queue Q);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
 
 /* *** Konstruktor *** */
-void CreateEmpty(Queue *Q,int Max);
+void CreateEmptyQueue(Queue *Q,int Max);
 /* I.S. Max terdefinisi }
    F.S. Sebuah Q kosong terbentuk dan salah satu kondisi sbb :
    Jika alokasi berhasil, tabel memori dialokasi berukuran Max
@@ -52,17 +53,17 @@ void CreateEmpty(Queue *Q,int Max);
    Proses : Melakukan alokasi memori dan membuat sebuah Q kosong */
 
 /* *** Destruktor *** */
-void DeAlokasi(Queue *Q);
+void DeAlokasiQueue(Queue *Q);
 /* Proses : Mengembalikan memori Q
    I.S. Q pernah dialokasi
    F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
 
 /* *** Operator-Operator Dasar Queue *** */
-void Add(Queue *Q,infotype X);
+void AddQueue(Queue *Q,infotypeQueue X);
 /* Proses : Menambahkan X pada Q dengan aturan FIFO
    I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh
    F.S. X menjadi TAIL yang baru, TAIL "maju" */
-void Del(Queue *Q,infotype *X);
+void DelQueue(Queue *Q,infotypeQueue *X);
 /* Proses: Menghapus elemen pertama pada Q dengan aturan FIFO
    I.S. Q tidak kosong
    F.S. X = nilai elemen HEAD pada I.S.,

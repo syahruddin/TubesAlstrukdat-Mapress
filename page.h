@@ -2,6 +2,7 @@
 #define PAGE_H
 #include <stdio.h>
 #include <stdlib.h>
+#include "play.h"
 
 void CoverPage();
 // Menampilkan "Diner Dash" wkwkwkw
@@ -24,10 +25,5 @@ void TulisMap();
 void Exit();
 // Keluar dari game
 
-void GameOver();
-// Menampilkan Tulisan Game Over
-
-void Credit();
-// Menampilkan credit created by:
 
 #endif

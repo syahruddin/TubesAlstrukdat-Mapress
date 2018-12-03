@@ -119,7 +119,7 @@ void TulisMATRIKS (MATRIKS M)
 	{
 		for(j = GetFirstIdxKol(M); j <= GetLastIdxKol(M); j++)
 		{
-			printf("%d", Elmt(M,i,j));
+			printf("%c", Elmt(M,i,j));
 			if(j != GetLastIdxKol(M))
 			{
 				printf(" ");
