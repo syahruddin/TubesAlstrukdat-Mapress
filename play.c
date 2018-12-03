@@ -1,4 +1,5 @@
 #include "play.h"
+#include "page.h"
 #include <stdio.h>
 #include <string.h>
 
