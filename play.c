@@ -40,6 +40,7 @@ void startmain(char name[]){
         getInput(&petaTamu,&petaDapur,&infogame,name,&player,&antrian);
     }
     GameOver();
+    Credit();
 }
 void BacaFileMap(MATRIKS *peta,char* namafile){
 //masukin dari file peta ke matrix

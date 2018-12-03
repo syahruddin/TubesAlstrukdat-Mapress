@@ -1,4 +1,5 @@
 #include "page.h"
+#include "play.h"
 
 
 void CoverPage(){
@@ -112,8 +113,7 @@ void FrontPage(){
 		
 		if (menu == '1'){
 			printf("Your name: ");
-			scanf("%s", name);
-            StartGame(name);
+			scanf("%s", name); //Masuk ke game cuma bisa dari input Start Game, New Game cuma untuk tulis nama
 		}else if (menu == '2'){
 			if (name[1] != ' '){
 				StartGame(name);
